@@ -1,17 +1,43 @@
-userdataname = ["admin","default"]
-userdatapwd = ["123456","456789"]
-def login():
-    username = input("请输入您的用户名：")
-    if username in userdataname:
-        userindex = userdataname.index(str(username))
-        login_pwd(userindex)
-    else:
-        print("您的用户不存在，请返回注册")
-def login_pwd(userindex):
-    userpwd = input("请输入您的密码：")
-    if userpwd == userdatapwd[userindex]:
-        print("登录成功！")
-    else:
-        print("密码错误！")
-        login_pwd(userindex)
-login()
+"""
+a = input("请输入：")
+b = []
+while a != "q":
+    b.append(a)
+    a = input("请输入：")
+print(b)
+"""
+"""
+x = ["1","2","3","4","5"]
+x.reverse()
+print(x)
+"""
+rockets = []
+lakers = []
+def team_score():
+    team = input("请输入队伍名称：1.火箭     2.湖人     （输入“g”出结果）")
+    while team == "1":
+        score = input("请输入火箭队得分（输入q返回上一层）：")
+        if score == "q":
+            team_score()
+        else:
+            score = int(score)
+            rockets.append(score)
+    while team == "2":
+        score = input("请输入湖人队得分（输入q返回上一层）：")
+        if score == "q":
+            team_score()
+        else:
+            score = int(score)
+            lakers.append(score)
+    while team == "g":
+        print("火箭队得分：",sum(rockets))
+        print("湖人队得分：",sum(lakers))
+        if sum(rockets) > sum(lakers):
+            print("Winner is Rockets!")
+        elif sum(rockets) < sum(lakers):
+            print("Winner is Lakers!")
+        else:
+            print("Draw!")
+    print("输入的选项有误，请重新选择！")
+    team_score()
+team_score()
