@@ -14,36 +14,22 @@ print(x)
 
 #5.3
 import sys
+
 team1txt = input("请输入第一支队伍：")
 team2txt = input("请输入第二支队伍：")
 team1 = []
 team2 = []
+
+team_score()
+
 def team_score():
     team = input("请选择给哪支队伍进行加分：1.%s     2.%s     （输入g出结果，输入q退出）" % (team1txt,team2txt))
     while team == "1":
         score = input("请输入%s得分（输入q返回上一层）："% team1txt)
-        if score == "q":
-            team_score()
-        else:
-            try:
-                score = int(score)
-            except ValueError:
-                print("输入错误，请重新输入！")
-            else:
-                score = int(score)
-                team1.append(score)
+        inputscore(score,team)
     while team == "2":
         score = input("请输入%s得分（输入q返回上一层）：" % team2txt)
-        if score == "q":
-            team_score()
-        else:
-            try:
-                score = int(score)
-            except ValueError:
-                print("输入错误，请重新输入！")
-            else:
-                score = int(score)
-                team2.append(score)
+        inputscore(score,team)
     if team == "g":
         print("%s得分：" % team1txt,sum(team1))
         print("%s得分：" % team2txt,sum(team2))
@@ -59,4 +45,18 @@ def team_score():
     else:
         print("输入的选项有误，请重新选择！")
         team_score()
-team_score()
+
+def inputscore(score,team):
+    if score == "q":
+        team_score()
+    else:
+        try:
+            score = int(score)
+        except ValueError:
+            print("输入错误，请重新输入！")
+        else:
+            score = int(score)
+            if team == "1":
+                team1.append(score)
+            else:
+                team2.append(score)
