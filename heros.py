@@ -134,4 +134,3 @@ def game(userindex):
     print("#" * 50)
 
 home()
-"李兴友大傻逼"
