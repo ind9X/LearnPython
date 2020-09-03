@@ -11,6 +11,8 @@ x = ["1","2","3","4","5"]
 x.reverse()
 print(x)
 """
+
+#5.3
 import sys
 team1txt = input("请输入第一支队伍：")
 team2txt = input("请输入第二支队伍：")
