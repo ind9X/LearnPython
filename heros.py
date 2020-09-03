@@ -30,7 +30,7 @@ def Game():
         attack = mage[1]
         defense = mage[2]
         print("默认角色%s" % work)
-    info = (name,work,hp,attack,defense)
+    info = [name,work,hp,attack,defense]
     print("#" * 50)
     print("#    当前用户信息：                              #")
     print("#    用户名：%-10s血量：%6d              #" % (info[0],info[2]))
