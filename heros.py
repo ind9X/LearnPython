@@ -81,7 +81,7 @@ def signup_pwd():
         pwd = input("您的密码长度不符合规则，请重新输入您的密码：")
     print("注册成功，请返回主页面登录！")
     userdatapwd.append(pwd)
-    #home()
+    home()
 
 def login_name():
     username = input("请输入您的用户名：")
@@ -96,7 +96,7 @@ def login_pwd(userindex):
     userpwd = input("请输入您的密码：")
     if userpwd == userdatapwd[userindex]:
         print("登录成功！")
-        #game(userindex)
+        game(userindex)
     else:
         print("密码错误！")
         login_pwd(userindex)
@@ -134,5 +134,3 @@ def game(userindex):
     print("#" * 50)
 
 home()
-print(userdataname)
-print(userdatapwd)
