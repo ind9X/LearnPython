@@ -1,2 +1,2 @@
 #   Learn Python.
-#   star:20200831
+#   start:20200831
