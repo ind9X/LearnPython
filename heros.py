@@ -96,36 +96,36 @@ def game(userindex):
     map()
 
 def map():
-    worldMap = (['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'])
-    row = 2
-    col = 2
+    worldmap = (['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'])
+    x = 2
+    y = 2
     while 1:
-        if row == -5 or row == 5:
-            row = 0
-        if col == -5 or col == 5:
-            col = 0
-        worldMap[col][row] = "*"
+        if x == -5 or x == 5:
+            x = 0
+        if y == -5 or y == 5:
+            y = 0
+        worldmap[y][x] = "*"
         print("当前您身处位置：")
         print("-"*9)
-        print("$","".join(worldMap[0]),"$")
-        print("$","".join(worldMap[1]),"$")
-        print("$","".join(worldMap[2]),"$")
-        print("$","".join(worldMap[3]),"$")
-        print("$","".join(worldMap[4]),"$")
+        print("$","".join(worldmap[0]),"$")
+        print("$","".join(worldmap[1]),"$")
+        print("$","".join(worldmap[2]),"$")
+        print("$","".join(worldmap[3]),"$")
+        print("$","".join(worldmap[4]),"$")
         print("-"*9)
         move = input("请输入WASD移动（按q退出游戏）：")
         if move == "w":
-            worldMap[col][row] = '#'
-            col -= 1
+            worldmap[y][x] = '#'
+            y -= 1
         elif move == "s":
-            worldMap[col][row] = '#'
-            col += 1
+            worldmap[y][x] = '#'
+            y += 1
         elif move == "d":
-            worldMap[col][row] = '#'
-            row += 1
+            worldmap[y][x] = '#'
+            x += 1
         elif move == "a":
-            worldMap[col][row] = '#'
-            row -= 1
+            worldmap[y][x] = '#'
+            x -= 1
         elif move == "q":
             sys.exit(0)
         else:
