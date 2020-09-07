@@ -2,8 +2,10 @@ import math
 import random
 import sys
 
-userdataname = ["admin","default"]
-userdatapwd = ["123456","456789"]
+userdata = {
+    "admin": "123456",
+    "default": "456789"
+}
 name = "default"
 pwd = "default"
 
@@ -12,7 +14,7 @@ def home():
     if num == "1":
         signup_name()
     elif num == "2":
-        login_name()
+        login()
     else:
         print("选择有误！请重新选择。")
         home()
@@ -23,46 +25,43 @@ def signup_name():
     name = input("请输入您的用户名：")
     while len(name) != 0 and len(name) <= 3 or len(name) > 9:
         name = input("您的用户名长度不符合规则，请重新输入您的用户名：")
-    while name in userdataname:
+    while name in userdata:
         name = input("用户名已存在！请重新输入：")
         while len(name) != 0 and len(name) <= 3 or len(name) > 9:
             name = input("您的用户名长度不符合规则，请重新输入您的用户名：")
     if not name:
         name = 'player' + str(random.randrange(101,199))
         print("检测到您未输入用户名，我们将随机生成一个您的用户名：",name)
-        userdataname.append(name)
-        signup_pwd()
+        signup_pwd(name)
     else:
-        userdataname.append(name)
-        signup_pwd()
+        signup_pwd(name)
 
-def signup_pwd():
+def signup_pwd(name):
     pwd = input("请输入您的密码：")
     while 5 >= len(pwd) or len(pwd) > 10:
         pwd = input("您的密码长度不符合规则，请重新输入您的密码：")
     print("注册成功，请返回主页面登录！")
-    userdatapwd.append(pwd)
+    userdata[name] = pwd
     home()
 
-def login_name():
+def login():
     username = input("请输入您的用户名：")
-    if username in userdataname:
-        userindex = userdataname.index(str(username))
-        login_pwd(userindex)
+    if username in userdata:
+        userpwd = input("请输入您的密码：")
+        if userpwd == userdata[username]:
+            print("登录成功！")
+            game(username)
+        else:
+            while 1:
+                userpwd = input("密码错误！请重新输入您的密码：")
+                if userpwd == userdata[username]:
+                    print("登录成功！")
+                    game(username)
     else:
         print("您的用户不存在，将自动前往注册")
         signup_name()
 
-def login_pwd(userindex):
-    userpwd = input("请输入您的密码：")
-    if userpwd == userdatapwd[userindex]:
-        print("登录成功！")
-        game(userindex)
-    else:
-        print("密码错误！")
-        login_pwd(userindex)
-
-def game(userindex):
+def game(username):
     print("#" * 50)
     print("欢迎来到Heros World！")
     worknum = input("请您选择您的职业：1:法师，2:战士     ")
@@ -86,14 +85,17 @@ def game(userindex):
         attack = mage[2]
         defense = mage[3]
         print("默认角色%s" % work)
-    info = [userdataname[userindex],work,hp,attack,defense]
+    info = [username,work,hp,attack,defense]
     print("#" * 50)
     print("#    当前用户信息：                              #")
     print("#    用户名：%-10s血量：%6d              #" % (info[0],info[2]))
     print("#                      攻击力：%4d              #" % info[3])
     print("#    职业：%-10s防御力：%4d              #" % (info[1],info[4]))
     print("#" * 50)
-    map()
+    while 1:
+        key = input("按m进入游戏地图：")
+        if key == "m":
+            map()
 
 def map():
     worldmap = (['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'])
