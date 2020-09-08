@@ -2,66 +2,79 @@ import math
 import random
 import sys
 
-userdata = {
-    "admin": "123456",
-    "default": "456789"
-}
-name = "default"
-pwd = "default"
-
-def home():
+def Home():
     num = input("欢迎来到Heros World！请选择：1.注册     2.登录     ")
     if num == "1":
-        signup_name()
+        Signup_name()
     elif num == "2":
-        login()
+        Login()
     else:
         print("选择有误！请重新选择。")
-        home()
+        Home()
 
-def signup_name():
+def Signup_name():
+    userdatadict = {}
+    FileToDict(userdatadict)
     print("#" * 50)
     print("欢迎来到Heros World！注册界面")
-    name = input("请输入您的用户名：")
+    name = input("请输入您的用户名：").strip()
     while len(name) != 0 and len(name) <= 3 or len(name) > 9:
-        name = input("您的用户名长度不符合规则，请重新输入您的用户名：")
-    while name in userdata:
-        name = input("用户名已存在！请重新输入：")
+        name = input("您的用户名长度不符合规则，请重新输入您的用户名：").strip()
+    while name in userdatadict:
+        name = input("用户名已存在！请重新输入：").strip()
         while len(name) != 0 and len(name) <= 3 or len(name) > 9:
-            name = input("您的用户名长度不符合规则，请重新输入您的用户名：")
+            name = input("您的用户名长度不符合规则，请重新输入您的用户名：").strip()
     if not name:
         name = 'player' + str(random.randrange(101,199))
         print("检测到您未输入用户名，我们将随机生成一个您的用户名：",name)
-        signup_pwd(name)
+        Signup_pwd(name)
     else:
-        signup_pwd(name)
+        Signup_pwd(name)
 
-def signup_pwd(name):
-    pwd = input("请输入您的密码：")
+def Signup_pwd(name):
+    pwd = input("请输入您的密码：").strip()
     while 5 >= len(pwd) or len(pwd) > 10:
-        pwd = input("您的密码长度不符合规则，请重新输入您的密码：")
+        pwd = input("您的密码长度不符合规则，请重新输入您的密码：").strip()
     print("注册成功，请返回主页面登录！")
-    userdata[name] = pwd
-    home()
+    DictToFile(name,pwd)
+    Home()
 
-def login():
+def Login():
+    userdatadict = {}
+    FileToDict(userdatadict)
     username = input("请输入您的用户名：")
-    if username in userdata:
+    if username in userdatadict:
         userpwd = input("请输入您的密码：")
-        if userpwd == userdata[username]:
+        if userpwd == userdatadict[username]:
             print("登录成功！")
-            game(username)
+            Game(username)
         else:
             while 1:
                 userpwd = input("密码错误！请重新输入您的密码：")
-                if userpwd == userdata[username]:
+                if userpwd == userdatadict[username]:
                     print("登录成功！")
-                    game(username)
+                    Game(username)
     else:
         print("您的用户不存在，将自动前往注册")
-        signup_name()
+        Signup_name()
 
-def game(username):
+def DictToFile(name,pwd):
+    datadict = {}
+    datadict[name] = pwd
+    with open("userdata.txt", "a") as data:
+        for name,pwd in datadict.items():
+            data.write(str(name) + '     ' + str(pwd) + '' + '\n')
+
+def FileToDict(userdatadict):
+    with open("userdata.txt","r") as userdata:
+        for line in userdata.readlines():
+            line = line.strip()
+            name = line.split('     ')[0]
+            pwd = line.split('     ')[1]
+            userdatadict[name] = pwd
+        return userdatadict
+
+def Game(username):
     print("#" * 50)
     print("欢迎来到Heros World！")
     worknum = input("请您选择您的职业：1:法师，2:战士     ")
@@ -95,9 +108,9 @@ def game(username):
     while 1:
         key = input("按m进入游戏地图：")
         if key == "m":
-            map()
+            Map()
 
-def map():
+def Map():
     worldmap = (['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'],['#','#','#','#','#'])
     x = 2
     y = 2
@@ -133,4 +146,4 @@ def map():
         else:
             print("移动失败，请重新输入！")
 
-home()
+Home()
