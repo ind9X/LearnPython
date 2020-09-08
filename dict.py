@@ -24,3 +24,12 @@ print(count)
 for x,y in count.items():
     print(x,y)
 """
+name = "NIUZHE"
+age = 21
+work = "student"
+dict = {}
+dict[name] = age,work
+for i in dict:
+    print(i)
+print(dict[name][0])
+print(dict.values())
