@@ -32,7 +32,7 @@ def Signup():
         UserPwd = input("^您的密码长度不符合规则，请重新输入您的密码：").strip()
     SelectCareer = input("^请选择您的职业：1.战士     2.法师：").strip()
     Warrior = ("战士",120,80,100)
-    Mage = ("法师",100,100,80) 
+    Mage = ("法师",100,100,80)
     while 1:
         if SelectCareer == "1":
             SelectCareer = Warrior[0]
@@ -48,7 +48,7 @@ def Signup():
             break
         else:
             SelectCareer = input("^请您重新选择职业：1.战士     2.法师：").strip()
-    DefualtX = 2
+    DefualtX = 5
     DefualtY = 2
     Dict_File(UserName,UserPwd,SelectCareer,UserHp,UserAttack,UserDefense,DefualtX,DefualtY)
     Login()
