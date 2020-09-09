@@ -1,6 +1,6 @@
 import re
 from urllib import request
-
+import requests
 """
 url = 'https://www.qiushibaike.com/imgrank/'
 re_jpg = re.compile(r'<img src="(.*?\.jpg)"')
@@ -31,6 +31,6 @@ def ImgDown(HtmlUrl):
     n = 1
     for i in ImgList:
         print("正在下载第",n,"个：https:%s" % i)
-        request.urlretrieve("https:" + i, "./img/%s.jpg" % n)
+        request.urlretrieve("https:" + i, "%s.jpg" % n)
         n += 1
 ImgDown(HtmlUrl)
